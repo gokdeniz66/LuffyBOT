@@ -86,7 +86,7 @@ client.on("messageCreate", async (message) => {
         "https://api.jikan.moe/v4/anime/21/characters"
       );
       const data = response.data;
-      let a = Math.random() * 8;
+      let a = Math.random() * 500;
       let x = Math.round(a);
       var name = `${data.data[x].character.name}`;
       var picture = `${data.data[x].character.images.jpg.image_url}`;
