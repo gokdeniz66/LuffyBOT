@@ -1,5 +1,11 @@
 require("dotenv").config();
-const { Client, IntentsBitField, ActivityType, Events } = require("discord.js");
+const {
+  Client,
+  IntentsBitField,
+  ActivityType,
+  Events,
+  EmbedBuilder,
+} = require("discord.js");
 const { request } = require("undici");
 const axios = require("axios");
 
@@ -34,7 +40,7 @@ client.on("ready", (c) => {
   setInterval(() => {
     let random = Math.floor(Math.random() * status.length);
     client.user.setActivity(status[random]);
-  }, 30000);
+  }, 10000);
 });
 
 client.on("messageCreate", (message) => {
@@ -70,19 +76,74 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.content === "!character") {
+  let msgArray = message.content.split(" "); // Splits the message content with space as a delimiter
+  let command = msgArray[0]; // Gets the first element of msgArray
+  let args = msgArray.slice(1); // Remove the first element of msgArray/command and this basically returns the arguments
+
+  if (command === "!character") {
     try {
       const response = await axios.get(
         "https://api.jikan.moe/v4/anime/21/characters"
       );
       const data = response.data;
-      let a = Math.random() * 100;
+      let a = Math.random() * 8;
       let x = Math.round(a);
-      message.reply(`${data.data[x].character.images.jpg.image_url}`);
-      message.reply(`${data.data[x].character.name}`);
+      var name = `${data.data[x].character.name}`;
+      var picture = `${data.data[x].character.images.jpg.image_url}`;
+      var url = `${data.data[x].character.url}`;
+      var role = `${data.data[x].role}`;
+
+      const exampleEmbed = new EmbedBuilder()
+        .setColor(0x0099ff)
+        .setTitle("Character")
+        .setURL(url)
+        .addFields(
+          {
+            name: "Name:",
+            value: name,
+            inline: true,
+          },
+          {
+            name: "Role:",
+            value: role,
+            inline: true,
+          }
+        )
+        .setImage(picture);
+      message.reply({ embeds: [exampleEmbed] });
     } catch (error) {
       console.error(error);
       message.reply("An error occurred while fetching data.");
+    }
+  }
+
+  if (command === "!search") {
+    if (!args[0]) return message.reply("Please specify an username.");
+    let input = args[0];
+
+    try {
+      const response = await axios.get(
+        "https://api.jikan.moe/v4/users/" + input + "/full"
+      );
+      const data = response.data;
+      var name = `${data.data.username}`;
+      var picture = `${data.data.images.jpg.image_url}`;
+      var url = `${data.data.url}`;
+      var lo = `${data.data.last_online}`;
+      var lastOnline = lo.substring(0, 10);
+
+      const exampleEmbed = new EmbedBuilder()
+        .setColor(0x0099ff)
+        .setTitle("Profile")
+        .setURL(url)
+        .setDescription(name)
+        .setImage(picture)
+        .setFooter({
+          text: "Last online: " + lastOnline,
+        });
+      message.reply({ embeds: [exampleEmbed] });
+    } catch (error) {
+      message.reply("The specified user doesn't exist!");
     }
   }
 });
