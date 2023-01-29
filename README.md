@@ -1,10 +1,14 @@
 # LuffyBOT
-An one piece discord bot created by me to learn the discord API.
+An one piece discord bot that is using the Jikan API.
 
 The bot has a custom status.
 
 ![image](https://user-images.githubusercontent.com/43775451/214673706-1c7846b3-a812-4d8d-92da-0ccdce76583a.png)
 
-One of the commands is !character (It will show a random One Piece character with the name under it).
+One of the commands is !character (It will show a random One Piece character with the name and role).
 
-![image](https://user-images.githubusercontent.com/43775451/214675599-b8aa5295-c596-4365-996e-eb2e0451b26e.png)
+![character](https://user-images.githubusercontent.com/43775451/215301366-f83c57f2-3b18-4b75-9b87-3d303d0bc9ed.PNG)
+
+You can search profiles from MyAnimeList with the command !search {username} (you need to provide the MyAnimeList username).
+
+![profile](https://user-images.githubusercontent.com/43775451/215301453-cda8b9b5-eac5-4f0b-b43e-c414d717fd9f.PNG)
