@@ -36,6 +36,7 @@ let status = [
 
 client.on("ready", (c) => {
   console.log(`${c.user.username} is online`);
+  client.user.setUsername("LuffyBOT");
 
   setInterval(() => {
     let random = Math.floor(Math.random() * status.length);
@@ -127,6 +128,8 @@ client.on("messageCreate", async (message) => {
       );
       const data = response.data;
       var name = `${data.data.username}`;
+      var watching = `${data.data.statistics.anime.watching}`;
+      var total = `${data.data.statistics.anime.episodes_watched}`;
       var picture = `${data.data.images.jpg.image_url}`;
       var url = `${data.data.url}`;
       var lo = `${data.data.last_online}`;
@@ -134,9 +137,20 @@ client.on("messageCreate", async (message) => {
 
       const exampleEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle("Profile")
+        .setTitle(name + "'s Profile")
         .setURL(url)
-        .setDescription(name)
+        .addFields(
+          {
+            name: "Watching:",
+            value: watching + " anime (s)",
+            inline: true,
+          },
+          {
+            name: "Total watched:",
+            value: total + " episodes",
+            inline: true,
+          }
+        )
         .setImage(picture)
         .setFooter({
           text: "Last online: " + lastOnline,
