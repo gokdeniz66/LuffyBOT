@@ -11,4 +11,5 @@ One of the commands is !character (It will show a random One Piece character wit
 
 You can search profiles from MyAnimeList with the command !search {username} (you need to provide the MyAnimeList username).
 
-![profile](https://user-images.githubusercontent.com/43775451/215301453-cda8b9b5-eac5-4f0b-b43e-c414d717fd9f.PNG)
+![image](https://user-images.githubusercontent.com/43775451/216460957-63a9195e-c902-4a97-8ed9-272a2cf0a763.png)
+
