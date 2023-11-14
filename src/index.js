@@ -30,7 +30,12 @@ let status = [
   {
     name: "One Piece",
     type: ActivityType.Streaming,
-    url: "https://www.youtube.com/watch?v=HRaoYuRKBaA",
+    url: "https://www.youtube.com/watch?v=xPyJ2XhSKOI",
+  },
+  {
+    name: "Binks Sake",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=46SJtTC23yE",
   },
 ];
 
@@ -67,12 +72,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     interaction.editReply(
       "https://cdn.discordapp.com/attachments/1065951898613600279/1066826797859221604/7f75b03f23294ffa31678a6322c9a6a0.png"
     );
-  }
-
-  if (commandName === "cat") {
-    const catResult = await request("https://aws.random.cat/meow");
-    const { file } = await catResult.body.json();
-    interaction.editReply({ files: [file] });
   }
 });
 
